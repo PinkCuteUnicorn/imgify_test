@@ -35,9 +35,9 @@
 
 static void do_work(const options_t *options, void *data, size_t filesize) {
 	const uint8_t channels = 4;
-	const uint32_t width = ceil(sqrt(filesize / channels));
-	const uint32_t height = ceil(filesize / channels / width) + 1;
-	const uint32_t padding = width * height * channels - filesize;
+	const uint32_t width = (uint32_t) ceil(sqrt(filesize / channels));
+	const uint32_t height = (uint32_t) ceil(filesize / channels / width) + 1;
+	const uint32_t padding = (uint32_t) (width * height * channels - filesize);
 
 	printf("Input file => %s\n  size => %zu bytes\n", options->input, filesize);
 

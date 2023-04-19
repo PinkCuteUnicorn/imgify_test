@@ -13,5 +13,5 @@ size_t fsize(const char *filename) {
 		perror("stat");
 		exit(EXIT_FAILURE);
 	}
-	return stat_buf.st_size;
+	return (size_t) stat_buf.st_size;
 }

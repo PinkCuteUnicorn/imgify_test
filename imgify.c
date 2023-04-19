@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <png.h>
+#include "imgify.h"
 
 static uint8_t* pixel_at(uint8_t *data, uint32_t row, uint32_t col, uint32_t width, uint32_t height, uint8_t channels) {
 	assert(data != NULL);
@@ -111,7 +112,7 @@ bool png_load(const char *filename, uint8_t **out_buffer, size_t *out_buffer_siz
 	const uint8_t channels = png_get_channels(png_ptr, info_ptr);
 
 	// Calculate how much memory it will take.
-	const size_t data_size = width * height * bit_depth * channels / 8;
+	const size_t data_size = width * height * ((uint32_t) bit_depth) * channels / 8;
 
 	// Allocate the data buffer.
 	uint8_t *data = malloc(data_size);
@@ -124,7 +125,7 @@ bool png_load(const char *filename, uint8_t **out_buffer, size_t *out_buffer_siz
 	}
 
 	// The length of one row in bytes - the seme as `width * bit_depth * channels / 8`.
-	const uint32_t rowbytes = png_get_rowbytes(png_ptr, info_ptr);
+	const uint32_t rowbytes = (uint32_t) png_get_rowbytes(png_ptr, info_ptr);
 
 	// Set the row pointers.
 	for (size_t i = 0; i < height; ++i) {
@@ -227,7 +228,7 @@ bool png_save(const char *filename, uint8_t *data, uint32_t width, uint32_t heig
 	png_write_info(png_ptr, info_ptr);
 
 	// The length of one row in bytes - the seme as `width * bit_depth * channels / 8`.
-	const uint32_t rowbytes = png_get_rowbytes(png_ptr, info_ptr);
+	const uint32_t rowbytes = (uint32_t) png_get_rowbytes(png_ptr, info_ptr);
 	const bool needs_padding = padding > 0;
 	for (uint32_t i=0; i < height; i++) {
 		const bool is_lastrow = i == height - 1;
