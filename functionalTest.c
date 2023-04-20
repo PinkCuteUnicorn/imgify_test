@@ -72,7 +72,7 @@ static bool png2binTest(const options_t *options, void *data, size_t filesize) {
 }
 
 
-int runPngTest(options_t *options){
+static int runPngTest(options_t *options){
 
 
 	int fd = -1;
@@ -122,7 +122,7 @@ failed:
 	exit(EXIT_FAILURE);
 }
 
-int runBinTest(options_t *options){
+static int runBinTest(options_t *options){
 
 
 	int fd = -1;
@@ -176,7 +176,7 @@ failed:
 
 // Тест супер простой
 // Ожидается поступление png, он трансформируется в bin и обратно. Происходит сравнение размера итогового png файла.
-int runTest(options_t *options){
+static int runTest(options_t *options){
 
 	
 	int res = runPngTest(options);
@@ -188,13 +188,13 @@ int runTest(options_t *options){
 	return res;
 }
 
-void my_itoa(int num, char *str)
+static void my_itoa(int num, char *str)
 {
     sprintf(str, "%d", num);
 }
 
 
-void _fillOptions_(uint32_t index, const char* dir, options_t *options){
+static void _fillOptions_(uint32_t index, const char* dir, options_t *options){
 
 	options->input = malloc(100);
 	options->output = malloc(100);
@@ -213,7 +213,7 @@ void _fillOptions_(uint32_t index, const char* dir, options_t *options){
 	memcpy(options->output + strlen(dir) + strlen(intString) + 4, "\0", 1);
 
 }
-void _clearOptions_(options_t *options){
+static void _clearOptions_(options_t *options){
 	free(options->input);
 	free(options->output);	
 }
