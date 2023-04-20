@@ -188,7 +188,7 @@ static int runTest(options_t *options){
 	return res;
 }
 
-static void my_itoa(int num, char *str)
+static void my_itoa(uint32_t num, char *str)
 {
     sprintf(str, "%d", num);
 }
@@ -232,7 +232,7 @@ int main() {
 	memset(options, 0, sizeof(options_t));
 
 
-	for (int i = 0; i < 15; i++){
+	for (uint32_t i = 0; i < 15; i++){
 
 		_fillOptions_(i, "resources/", options);
 		//printf("Start input %s, output %s\n", options->input, options->output);
